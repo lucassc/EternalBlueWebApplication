@@ -23,6 +23,7 @@ namespace EternalBlueWebApplication.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Index(string pass)
         {
             var isPasswordIncorrect = pass != _eternalBlueService.FirstPassword;
@@ -38,6 +39,7 @@ namespace EternalBlueWebApplication.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult SecondStep(string pass)
         {
             var isPasswordIncorrect = pass != _eternalBlueService.SecondPassword;
