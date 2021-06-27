@@ -1,39 +1,32 @@
-﻿using EternalBlueWebApplication.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using EternalBlueWebApplication.Contracts;
 
 namespace EternalBlueWebApplication.Services
 {
     public class EternalBlueService : IEternalBlueService
     {
         private const string firstPassword = "blueb1ueBlue";
-        private static string firstPasswordASCIIForm;
         private const string secondPassword = "blue1sF0rev3r";
+        private string _firstPasswordAsciiForm;
 
         public string FirstPassword => firstPassword;
 
-        public string FirstPasswordASCIIForm {
-            get {
-
-                if (firstPasswordASCIIForm == null)
-                    firstPasswordASCIIForm = GetASCIIString(firstPassword);
-                return firstPasswordASCIIForm;
-            }
-        }
+        public string FirstPasswordASCIIForm =>
+            _firstPasswordAsciiForm ??= GetASCIIString(firstPassword);
 
         public string SecondPassword => secondPassword;
 
         private string GetASCIIString(string str)
         {
-            List<string> s = new List<string>();
-            s.Add(((byte)str[0]).ToString());
-            for (int i = 1; i < str.Count(); i++)
+            var list = new List<string> {((byte) str[0]).ToString()};
+
+            for (var i = 1; i < str.Length; i++)
             {
-                s.Add(' ' + ((byte)str[i]).ToString());
+                list.Add(' ' + ((byte) str[i]).ToString());
             }
-            var result = string.Concat(s);
+
+            var result = string.Concat(list);
+
             return result;
         }
     }

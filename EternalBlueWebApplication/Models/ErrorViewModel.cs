@@ -1,5 +1,3 @@
-using System;
-
 namespace EternalBlueWebApplication.Models
 {
     public class ErrorViewModel
